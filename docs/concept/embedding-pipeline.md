@@ -4,114 +4,200 @@ sidebar_position: 3
 
 # Pipeline de Embedding
 
-É o responsavel por definir como os fragmentos vindos da [fonte de conhecimento](knowledge-source.md), são [separados](#separador-splitter), [pre processados](#pre-processador), [incorporados](#embedder) e [salvos](#indexador)
-Cada um desses passos tem uma configuração unica, definida na hora de criação da pipeline
+O **pipeline de embedding** define como os dados vindos de uma [fonte de conhecimento](knowledge-source.md) são transformados em representações vetoriais pesquisáveis.
+
+Esse processo envolve quatro etapas principais:
+
+1. **Separação** dos dados
+2. **Pré-processamento**
+3. **Geração de embeddings**
+4. **Indexação**
+
+Cada etapa possui uma configuração própria, definida no momento da criação do pipeline.
 
 :::warning
-Ao criar um pipeline de embedding ele **NÃO** pode ser alterado, ele pode ser apenas depreciado (descontinuado).
+Após criado, um pipeline de embedding é **imutável**.
+Ele não pode ser alterado — apenas **depreciado (descontinuado)** e substituído por um novo.
 :::
 
 ---
 
-## Separador
-Os fragmentos podem ser arquivos inteiros, ou conteudos muito grandes, então é necessario fazer uma separação em pedaços menores, e esse é o responsavel por essa separação. A configuração do separador é feita de acordo com o provider escolhido:
+## 🔹 Fluxo geral
+
+```
+
+Fragmento
+→ Separador (splitter)
+→ Pre-processadores
+→ Embedder
+→ Indexador
+
+```
+
+---
+
+## Separador (Splitter)
+
+Fragmentos podem ser grandes (ex: arquivos inteiros), então precisam ser divididos em partes menores (**chunks**).
+
+O **separador** é responsável por essa divisão.
+
+### Providers suportados:
+
 - [langchain](https://www.langchain.com/)
 - [unstructured](https://unstructured.io/)
 - outros
 
 :::tip
-O provider padrão é o [langchain](https://www.langchain.com/)
+O provider padrão é o **LangChain**.
 :::
+
+### Objetivo
+
+- melhorar a qualidade da busca semântica
+- evitar estouro de contexto dos modelos
+- aumentar precisão na recuperação de informações
 
 ---
-## Pre processador
-Apos a separação em pedacos (chunks), ocorre o pre processamento dos dados, onde eles são formatados para serem posteriormente indexados, os pre processadores disponiveis são:
+
+## Pre-processador
+
+Após a separação, cada chunk passa por uma etapa de **pré-processamento**, onde o texto é normalizado antes da geração dos embeddings.
+
+Os pré-processadores são aplicados **em sequência**, onde a saída de um é a entrada do próximo.
+
+---
 
 ### 1. ASCII
-<details>
-Converte todos os caracteres do texto para o conjunto de caracteres ASCII. Isso é útil para remover acentuação e caracteres especiais, uniformizando o texto para processos posteriores.<br/>
+
+Converte caracteres para o conjunto ASCII, removendo acentuação e caracteres especiais.
+
 **Exemplo:**
 ```
+
 Entrada: "Olá, cómo está você?"
 Saída:  "Ola, como esta voce?"
+
 ```
-</details>
+
+---
 
 ### 2. RemoveNewlines
-<details>
-Remove todas as quebras de linha (`\n`) do texto, transformando-o em uma única linha contínua<br/>
+
+Remove quebras de linha (`\n`), transformando o texto em uma única linha.
 
 **Exemplo:**
 ```
+
 Entrada: "Primeira linha\nSegunda linha"
-Saída:  "Primeira linhaSegunda linha"
+Saída:  "Primeira linha Segunda linha"
+
 ```
-</details>
+
+---
 
 ### 3. RemoveWhitespace
-<details>
-Remove todos os espaços em branco do texto, incluindo espaços simples, tabs e quebras de linha.<br/>
+
+Remove todos os espaços em branco (incluindo tabs e quebras de linha).
+
 **Exemplo:**
 ```
+
 Entrada: "Exemplo   de texto \n com   espaços."
 Saída:  "Exemplodetextocomespaços."
+
 ```
-</details>
+
+---
 
 ### 4. Trim
-<details>
-Remove espaços em branco do início e do fim do texto, mas preserva os espaços internos.<br/>
+
+Remove espaços no início e no fim do texto.
+
 **Exemplo:**
 ```
+
 Entrada: "   Texto com espaços.   "
 Saída:  "Texto com espaços."
+
 ```
-</details>
+
+---
 
 ### 5. LowerCase
-<details>
-Converte todo o texto para letras minúsculas, facilitando comparações e buscas insensíveis a maiúsculas/minúsculas.<br/>
+
+Converte todo o texto para minúsculas.
+
 **Exemplo:**
 ```
+
 Entrada: "Exemplo De Texto"
 Saída:  "exemplo de texto"
+
 ```
-</details>
+
+---
 
 ### 6. UpperCase
-<details>
-Converte todo o texto para letras maiúsculas.<br/>
+
+Converte todo o texto para maiúsculas.
+
 **Exemplo:**
 ```
+
 Entrada: "Exemplo De Texto"
 Saída:  "EXEMPLO DE TEXTO"
-```
-</details>
 
-:::tip
-Os pre processadores são aplicados em ordem, ou seja, o resultado do pre processador 1 é o input do pre processador 2, e assim por diante.
-:::
+```
 
 ---
 
 ## Embedder
-O embedder é o responsavel por incorporar os dados pre processados, ele é responsavel por criar os embeddings dos dados, para que eles possam ser buscados posteriormente. Esse processo é feito com LLMs.
 
-Entre as opções disponiveis, temos as seguintes:
+O **embedder** é responsável por transformar o texto em **vetores numéricos (embeddings)**.
+
+Esses vetores capturam o significado semântico do conteúdo, permitindo buscas por similaridade.
+
+Esse processo é feito utilizando modelos de IA.
+
+### Providers suportados:
+
 - [OpenAI](https://openai.com/)
 - [Anthropic](https://www.anthropic.com/)
-- [Google](https://cloud.google.com/vertex-ai)
+- [Google Vertex AI](https://cloud.google.com/vertex-ai)
 - [Cohere](https://cohere.com/)
-- [Groq](https://groq.com/)
-- [Mistral](https://mistral.ai/)
 - [Ollama](https://ollama.com/)
 - [OpenRouter](https://openrouter.ai/)
 
-## Indexador
-O indexador é o responsavel por armazenar os dados incorporados, ele é responsavel por criar o indice dos dados, para que eles possam ser buscados posteriormente.
+---
 
-O Snipet utiliza o PostgreSQL com a extensão pgvector para armazenar os dados incorporados.
+## Indexador
+
+O **indexador** é responsável por armazenar os embeddings e estruturar os dados para busca eficiente.
+
+No Snipet:
+
+- banco utilizado: **PostgreSQL**
+- extensão: **pgvector**
+
+### Como funciona
+
+- cada chunk gera um embedding
+- os embeddings são armazenados junto com seus metadados
+- consultas utilizam similaridade vetorial
 
 :::tip
-Cada modelo de incorporação tem um tamanho de embedding diferente, e o Snipet utiliza o tamanho de embedding do modelo para armazenar os dados incorporados, por isso os dados incorporados são armazenados em uma tabela separada para cada modelo de incorporação.
+Cada modelo de embedding possui uma dimensionalidade diferente.
+
+Por isso, o Snipet cria **estruturas separadas por modelo**, garantindo compatibilidade e performance.
 :::
+
+---
+
+## Resumo
+
+- Pipeline = transformação de dados → vetores pesquisáveis
+- Splitter = divide dados em chunks
+- Pre-processador = normaliza texto
+- Embedder = gera embeddings
+- Indexador = armazena e permite busca
