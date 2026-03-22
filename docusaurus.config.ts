@@ -1,6 +1,7 @@
 import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
+import type { ScalarOptions } from '@scalar/docusaurus'
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -66,6 +67,21 @@ const config: Config = {
         },
       } satisfies Preset.Options,
     ],
+  ],
+
+  plugins: [
+    [
+      "@scalar/docusaurus",
+      {
+        label: "API Docs",
+        route: "/api",
+        showNavLink: true,
+        configuration: {
+          agent: { disabled: true },
+          url: "http://localhost:8852/swagger/json"
+        }
+      } as ScalarOptions
+    ]
   ],
 
   themeConfig: {
