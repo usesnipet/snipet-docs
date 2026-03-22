@@ -2,9 +2,9 @@
 sidebar_position: 1
 ---
 
-# Fonte de conhecimento
+# Knowledge Source
 
-Uma **fonte de conhecimento** é o local de onde os dados são obtidos.
+Uma **Knowledge Source** é o local de onde os dados são obtidos.
 
 Ela representa uma **origem externa de leitura**, como:
 
@@ -43,13 +43,13 @@ Os fragmentos são a base para separação, processamento, indexação e recuper
 
 ## Como funciona?
 
-O Snipet se conecta à fonte de conhecimento através de uma **camada de comunicação**, responsável por sincronizar ou receber mudanças.
+O Snipet se conecta à Knowledge Source através de uma **camada de comunicação**, responsável por sincronizar ou receber mudanças.
 
 Existem dois modos principais:
 
 ---
 
-### 🔄 Pull (ativo)
+### Pull (ativo)
 
 No modo **pull**, o Snipet busca os dados periodicamente.
 
@@ -72,7 +72,7 @@ No modo **pull**, o Snipet busca os dados periodicamente.
 
 ---
 
-### 📡 Push (reativo)
+### Push (reativo)
 
 No modo **push**, a própria fonte notifica o Snipet quando algo muda.
 
@@ -83,7 +83,7 @@ No modo **push**, a própria fonte notifica o Snipet quando algo muda.
 
 **Ações:**
 
-- **Criação/atualização** → executa o [pipeline de embedding](embedding-pipeline.md)
+- **Criação/atualização** → executa o [Embedding Pipeline](embedding-pipeline.md)
 - **Remoção** → remove o fragmento
 
 **Quando usar:**
@@ -94,7 +94,7 @@ No modo **push**, a própria fonte notifica o Snipet quando algo muda.
 
 ---
 
-## MCP (Model Context Protocol)
+## Model Context Protocol (MCP)
 
 Fontes baseadas em MCP funcionam de forma diferente.
 

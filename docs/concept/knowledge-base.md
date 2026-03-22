@@ -2,9 +2,9 @@
 sidebar_position: 3
 ---
 
-# Base de conhecimento
+# Knowledge Base
 
-Uma **base de conhecimento** é um agrupamento lógico de [fontes de conhecimento](knowledge-source.md).
+Uma **Knowledge Base** é um agrupamento lógico de [Knowledge Sources](knowledge-source.md).
 
 Ela permite organizar diferentes fontes que possuem **relação entre si**, facilitando a busca, o contexto e a recuperação de informação.
 
@@ -23,15 +23,15 @@ Ela permite organizar diferentes fontes que possuem **relação entre si**, faci
 
 ## Como funciona
 
-Uma base de conhecimento pode conter múltiplas fontes, e uma mesma fonte pode, ser utilizada em mais de uma base.
+Uma Knowledge Base pode conter múltiplas Knowledge Sources, e uma mesma Knowledge Source pode, ser utilizada em mais de uma Knowledge Base.
 
-Durante a execução, o Snipet consulta a base de conhecimento para recuperar dados relevantes, que serão usados como contexto.
+Durante a execução, o Snipet consulta a Knowledge Base para recuperar dados relevantes, que serão usados como contexto.
 
 ---
 
 ## Exemplo
 
-### Fontes de conhecimento
+### Knowledge Sources
 
 - GitHub
 - GitHub Issues
@@ -44,7 +44,7 @@ Durante a execução, o Snipet consulta a base de conhecimento para recuperar da
 
 ---
 
-### Bases de conhecimento
+### Knowledge Bases
 
 - **Desenvolvimento**
   - GitHub

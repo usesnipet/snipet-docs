@@ -2,13 +2,13 @@
 sidebar_position: 2
 ---
 
-# Pipeline de Embedding
+# Embedding Pipeline
 
-O **pipeline de embedding** define como os dados vindos de uma [fonte de conhecimento](knowledge-source.md) são transformados em representações vetoriais pesquisáveis.
+O **Embedding Pipeline** define como os dados vindos de uma [Knowledge Source](knowledge-source.md) são transformados em representações vetoriais pesquisáveis.
 
 Esse processo envolve quatro etapas principais:
 
-1. **Separação** dos dados
+1. **Carregamento + Particionamento**
 2. **Pré-processamento**
 3. **Geração de embeddings**
 4. **Indexação**
@@ -27,7 +27,7 @@ Ele não pode ser alterado — apenas **depreciado (descontinuado)** e substitu�
 ```
 
 Fragmento
-→ Separador (splitter)
+→ Carregamento + Particionamento
 → Pre-processadores
 → Embedder
 → Indexador
@@ -36,11 +36,11 @@ Fragmento
 
 ---
 
-## Separador (Splitter)
+## Carregamento + Particionamento
 
-Fragmentos podem ser grandes (ex: arquivos inteiros), então precisam ser divididos em partes menores (**chunks**).
+Fragmentos podem ser grandes (ex: arquivos inteiros), então ele precisa ser carregado e depois dividido em partes menores (**chunks**).
 
-O **separador** é responsável por essa divisão.
+O **Carregamento + Particionamento** é responsável por carregar os fragmentos e dividi-los em partes menores.
 
 ### Providers suportados:
 
@@ -60,7 +60,7 @@ O provider padrão é o **LangChain**.
 
 ---
 
-## Pre-processador
+## Pré-processamento
 
 Após a separação, cada chunk passa por uma etapa de **pré-processamento**, onde o texto é normalizado antes da geração dos embeddings.
 
@@ -152,13 +152,13 @@ Saída:  "EXEMPLO DE TEXTO"
 
 ---
 
-## Embedder
+## Geração de embeddings
 
-O **embedder** é responsável por transformar o texto em **vetores numéricos (embeddings)**.
+O **gerador de embeddings** é responsável por transformar o texto em **vetores numéricos (embeddings)**.
 
 Esses vetores capturam o significado semântico do conteúdo, permitindo buscas por similaridade.
 
-Esse processo é feito utilizando modelos de IA.
+Esse processo é feito utilizando modelos de embedding.
 
 ### Providers suportados:
 
@@ -171,7 +171,7 @@ Esse processo é feito utilizando modelos de IA.
 
 ---
 
-## Indexador
+## Indexação
 
 O **indexador** é responsável por armazenar os embeddings e estruturar os dados para busca eficiente.
 
@@ -197,7 +197,7 @@ Por isso, o Snipet cria **estruturas separadas por modelo**, garantindo compatib
 ## Resumo
 
 - Pipeline = transformação de dados → vetores pesquisáveis
-- Splitter = divide dados em chunks
-- Pre-processador = normaliza texto
-- Embedder = gera embeddings
-- Indexador = armazena e permite busca
+- Carregamento + Particionamento = carrega e divide dados em chunks
+- Pré-processamento = normaliza texto
+- Geração de embeddings = gera embeddings
+- Indexação = armazena e permite busca
