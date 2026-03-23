@@ -1,0 +1,45 @@
+.feature-card {
+  padding: 1.5rem;
+  border: 1px solid #262626;
+  border-radius: 1rem;
+  background: rgba(23, 23, 23, 0.5);
+  transition: border-color 0.2s ease;
+}
+
+.feature-card:hover {
+  border-color: #404040;
+}
+
+.feature-card-icon-wrap {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  background: #262626;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.feature-card:hover .feature-card-icon-wrap {
+  background: #404040;
+}
+
+.feature-card-icon {
+  color: #d4d4d4;
+}
+
+.feature-card-title {
+  margin: 0 0 0.5rem;
+  color: #ffffff;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.feature-card-description {
+  margin: 0;
+  color: #a3a3a3;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}

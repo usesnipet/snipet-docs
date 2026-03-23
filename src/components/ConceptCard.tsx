@@ -1,4 +1,5 @@
 import React from "react";
+import "./ConceptCard.css";
 
 type ConceptCardProps = {
   title: string;
@@ -12,14 +13,14 @@ export default function ConceptCard({
   icon: Icon,
 }: ConceptCardProps) {
   return (
-    <div className="p-6 rounded-xl border border-neutral-800 bg-neutral-950 hover:bg-neutral-900 transition-colors">
-      <div className="flex items-center gap-3 mb-3">
-        <Icon size={18} className="text-emerald-500" />
-        <h3 className="font-mono text-sm font-bold text-neutral-200 uppercase tracking-wider">
+    <div className="concept-card">
+      <div className="concept-card-header">
+        <Icon size={18} className="concept-card-icon" />
+        <h3 className="concept-card-title">
           {title}
         </h3>
       </div>
-      <p className="text-neutral-400 text-sm leading-relaxed">{description}</p>
+      <p className="concept-card-description">{description}</p>
     </div>
   );
 }

@@ -1,0 +1,46 @@
+.flow-diagram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 3rem 0;
+}
+
+.flow-diagram-step-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.flow-diagram-step {
+  min-width: 8.75rem;
+  padding: 1rem 2rem;
+  border-radius: 0.75rem;
+  border: 1px solid #262626;
+  background: #171717;
+  color: #d4d4d4;
+  text-align: center;
+  font-size: 0.875rem;
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+.flow-diagram-arrow {
+  color: #404040;
+  transform: rotate(90deg);
+}
+
+@media (min-width: 768px) {
+  .flow-diagram {
+    flex-direction: row;
+  }
+
+  .flow-diagram-step-wrap {
+    flex-direction: row;
+  }
+
+  .flow-diagram-arrow {
+    transform: rotate(0deg);
+  }
+}

@@ -1,4 +1,5 @@
 import React from "react";
+import "./Section.css";
 
 type SectionProps = {
   children: React.ReactNode;
@@ -8,7 +9,7 @@ type SectionProps = {
 
 export default function Section({ children, className = "", id = "" }: SectionProps) {
   return (
-    <section id={id} className={`py-24 px-6 max-w-7xl mx-auto ${className}`}>
+    <section id={id} className={`section ${className}`}>
       {children}
     </section>
   );

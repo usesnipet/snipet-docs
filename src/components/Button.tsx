@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "motion/react";
+import "./Button.css";
 
 type ButtonProps = {
   children: React.ReactNode;
@@ -14,14 +15,12 @@ export default function Button({
   className = "",
   href,
 }: ButtonProps) {
-  const baseStyles =
-    "px-6 py-2.5 rounded-lg font-medium transition-all duration-200 flex items-center gap-2 text-sm";
+  const baseStyles = "button button-base";
 
   const variants: Record<NonNullable<ButtonProps["variant"]>, string> = {
-    primary: "bg-white text-black hover:bg-neutral-200",
-    secondary:
-      "bg-neutral-900 text-white border border-neutral-800 hover:bg-neutral-800",
-    ghost: "text-neutral-400 hover:text-white hover:bg-white/5",
+    primary: "button-primary",
+    secondary: "button-secondary",
+    ghost: "button-ghost",
   };
 
   const content = (
