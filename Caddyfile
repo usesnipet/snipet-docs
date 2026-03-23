@@ -1,7 +1,10 @@
-{$DOCUSAURUS_DOMAIN:localhost} {
+{
+  email {$DOCUSAURUS_EMAIL}
+}
+
+{$DOCUSAURUS_DOMAIN} {
   root * /var/docusaurus
   encode gzip
   try_files {path} /index.html
   file_server
-  email: {$DOCUSAURUS_EMAIL}
 }
